@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="DHAdministration_DBSource"
+  DTS:DTSID="{9D9D4444-6014-4B45-AA04-7F5A5D91306E}"
+  DTS:CreationName="OLEDB">
+  <DTS:PropertyExpression
+    DTS:Name="ConnectionString">@[$Project::P_VW020343DHAdministration]</DTS:PropertyExpression>
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectRetryCount="1"
+      DTS:ConnectRetryInterval="5"
+      DTS:ConnectionString="Data Source=VW020343;User ID=TATSTAGE;Initial Catalog=DHAdministration;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
+      <DTS:Password
+        DTS:Name="Password"
+        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAKgDWckUUQEWUZE0Ery4fPwAAAAACAAAAAAADZgAAwAAAABAAAAApBS/ZgEzaww15pdlXIfqjAAAAAASAAACgAAAAEAAAAJqUKidHsKUyVfzlZ6eC+D94AAAArBsgNdCOeijqWzyQvaMpITbJaVYPfEzwfVw2tE0Ege1FXBjQhq8D8rBgeO1gXX1qQZXk073JtLhdnoIP1r+A6vYd3vavm6bAAafw4prrnsHWGb9DsA8GLjzk3v4gMH4D64v76/jKxgNFJB0+KLAKgRs5sFi8TIGjFAAAAE6Rjqn1V5yzZK43vVJy6VvrbliW</DTS:Password>
+    </DTS:ConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

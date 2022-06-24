@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="TATCDC_SSIS_DBStaging"
+  DTS:DTSID="{61BC24D4-5521-4B79-A2D3-F9862D360A06}"
+  DTS:CreationName="OLEDB">
+  <DTS:PropertyExpression
+    DTS:Name="ConnectionString">@[$Project::P_SRVTATSQLNPTST_TATCDC]</DTS:PropertyExpression>
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectRetryCount="1"
+      DTS:ConnectRetryInterval="5"
+      DTS:ConnectionString="Data Source=SRVTATSQLNPTST;User ID=TATNP;Initial Catalog=TATCDC_SSIS;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
+      <DTS:Password
+        DTS:Name="Password"
+        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAKgDWckUUQEWUZE0Ery4fPwAAAAACAAAAAAADZgAAwAAAABAAAADSZFzd8W0ixtYLvobdS8TdAAAAAASAAACgAAAAEAAAAGy40gz/wtsr9c2y1eQ2BL+AAAAAlobQznxapSzUyDScqkZodTI+UXW2Dgv3wkkUVbDjGHe3yAI/0IkS2iEPdlY9MA0unArMWJen6DwfxwrjBYIPj1Qphb7XHN1a2KzYihIqeTuVc00ZGGP3QarasOw9sYsN811mXziM2MJcMNRoPmJ/ZdSCgc82sJVEXBGGD/j+ijkUAAAA5tWtTACHPNt8BOgJZ4aMTmNdbKQ=</DTS:Password>
+    </DTS:ConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

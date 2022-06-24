@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="DHAdministration_ADOSource"
+  DTS:DTSID="{F6683F3F-AFA7-4C3D-94A6-75A7E99C92E1}"
+  DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <DTS:PropertyExpression
+    DTS:Name="ConnectionString">@[$Project::P_VW020343DHAdministration_ADO]</DTS:PropertyExpression>
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="Data Source=VW020343;User ID=TATSTAGE;Initial Catalog=DHAdministration; Persist Security Info=True;">
+      <DTS:Password
+        DTS:Name="Password"
+        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAKgDWckUUQEWUZE0Ery4fPwAAAAACAAAAAAADZgAAwAAAABAAAAA9ZrYRpsPpDZaJehBs6YEtAAAAAASAAACgAAAAEAAAALu6tlyXhZOW6LiPGS6CPX94AAAAViBoWPWxaHjhYEzB+8mHEfRI/ufn1HbpbeZYdXl90Thh1eNolSoXH5rv30dzOHQSlr6C47/2/EU/D0qtPPXCYtw8uyBG+ecoqqluuhBsrP62LNzVuBycoXHwepF/vWftSVahGMH7az71kFnQJ0W9WHEDRbdUksJgFAAAAKuyMWHKu3DoUxEuCnD2m80P4N1J</DTS:Password>
+    </DTS:ConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

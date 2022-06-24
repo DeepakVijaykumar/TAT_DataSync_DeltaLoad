@@ -1,0 +1,1599 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/21/2022 6:18:14 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="USA-VW10APPD153"
+  DTS:CreatorName="NOV\vd"
+  DTS:DTSID="{5C54FCE3-3128-4448-A2E4-D877417AB3D9}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.521.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="9"
+  DTS:VersionGUID="{75DD7A22-357C-49C3-ACCB-A56E625F0A7A}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4C8A29C6-A6D5-4AC7-8BFE-BE81EC831502}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="CDC_State">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{67595B10-A4E1-4F57-8F2F-7EE1767F2E06}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\CDC Source"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Attunity Ltd.; All Rights Reserved; http://www.attunity.com;"
+              description="Reads change data from a SQL Server change table making it available for processing by downstream data-flow components. Only changes within the current processing range determined by the CDC Control task are read"
+              name="CDC Source"
+              usesDispositions="true"
+              version="8">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="An SSIS string package variable to store the CDC state of the current CDC state."
+                  expressionType="Notify"
+                  name="StateVariable"
+                  typeConverter="Attunity.SqlServer.CDCSrc.PackageVariablesTypeConverter">User::CDC_State</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the content of the metadata columns and the rows returned. Modes starting with ‘All’ return all changes and modes starting with ‘Net’ return net changes."
+                  expressionType="Notify"
+                  name="CDCProcessingMode"
+                  typeConverter="Attunity.SqlServer.CDCSrc.CdcProcessingMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The name of the CDC capture instance. By default the capture instance name is in the form of &quot;&lt;owner&gt;_&lt;table&gt;&quot;. The actual table that stores the changes is the CDC table named &quot;cdc&quot;.&quot;&lt;capture-instance&gt;_CT&quot;"
+                  expressionType="Notify"
+                  name="CaptureInstance">dbo_Apps</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time out."
+                  expressionType="Notify"
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="If true, a special output column called ‘__$reprocessing ’ is added. This output column is true for each data row during the initial processing range, or when the previous CDC run&#xA;was stopped without finishing. The default value is false (the __$reprocessing output column is not generated). This special output column allows the SSIS developer to handle consistency errors differently when working on the Initial Processing Range or the previous CDC run was stopped."
+                  expressionType="Notify"
+                  name="ReprocessingIndication">false</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Attunity.CdcSourceComponent</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\CDC Source.Connections[Connection]"
+                  connectionManagerID="{D34D622C-0EFA-4869-9785-E62B58A00D0A}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[DHAdministration_ADOSource]"
+                  name="Connection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\CDC Source.Outputs[Output]"
+                  name="Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[__$start_lsn]"
+                      dataType="bytes"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CDC Source.Outputs[Output].ExternalColumns[__$start_lsn]"
+                      length="10"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[__$start_lsn]"
+                      name="__$start_lsn"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[__$operation]"
+                      dataType="i4"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CDC Source.Outputs[Output].ExternalColumns[__$operation]"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[__$operation]"
+                      name="__$operation"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[__$update_mask]"
+                      dataType="bytes"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CDC Source.Outputs[Output].ExternalColumns[__$update_mask]"
+                      length="128"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[__$update_mask]"
+                      name="__$update_mask"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[AppId]"
+                      dataType="i4"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CDC Source.Outputs[Output].ExternalColumns[AppId]"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[AppId]"
+                      name="AppId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[AppName]"
+                      dataType="wstr"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CDC Source.Outputs[Output].ExternalColumns[AppName]"
+                      length="100"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[AppName]"
+                      name="AppName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[ExternalURL]"
+                      dataType="wstr"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CDC Source.Outputs[Output].ExternalColumns[ExternalURL]"
+                      length="100"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[ExternalURL]"
+                      name="ExternalURL"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[InternalURL]"
+                      dataType="wstr"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CDC Source.Outputs[Output].ExternalColumns[InternalURL]"
+                      length="100"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[InternalURL]"
+                      name="InternalURL"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[Owner]"
+                      dataType="wstr"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CDC Source.Outputs[Output].ExternalColumns[Owner]"
+                      length="30"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[Owner]"
+                      name="Owner"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[DateModified]"
+                      dataType="dbTimeStamp"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CDC Source.Outputs[Output].ExternalColumns[DateModified]"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[DateModified]"
+                      name="DateModified"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[DateCreated]"
+                      dataType="dbTimeStamp"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CDC Source.Outputs[Output].ExternalColumns[DateCreated]"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[DateCreated]"
+                      name="DateCreated"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[LastModifiedBy]"
+                      dataType="wstr"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CDC Source.Outputs[Output].ExternalColumns[LastModifiedBy]"
+                      length="30"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[LastModifiedBy]"
+                      name="LastModifiedBy"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[IsActive]"
+                      dataType="bool"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CDC Source.Outputs[Output].ExternalColumns[IsActive]"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[IsActive]"
+                      name="IsActive"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CDC Source.Outputs[Output].ExternalColumns[__$start_lsn]"
+                      dataType="bytes"
+                      length="10"
+                      name="__$start_lsn" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CDC Source.Outputs[Output].ExternalColumns[__$operation]"
+                      dataType="i4"
+                      name="__$operation" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CDC Source.Outputs[Output].ExternalColumns[__$update_mask]"
+                      dataType="bytes"
+                      length="128"
+                      name="__$update_mask" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CDC Source.Outputs[Output].ExternalColumns[AppId]"
+                      dataType="i4"
+                      name="AppId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CDC Source.Outputs[Output].ExternalColumns[AppName]"
+                      dataType="wstr"
+                      length="100"
+                      name="AppName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CDC Source.Outputs[Output].ExternalColumns[ExternalURL]"
+                      dataType="wstr"
+                      length="100"
+                      name="ExternalURL" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CDC Source.Outputs[Output].ExternalColumns[InternalURL]"
+                      dataType="wstr"
+                      length="100"
+                      name="InternalURL" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CDC Source.Outputs[Output].ExternalColumns[Owner]"
+                      dataType="wstr"
+                      length="30"
+                      name="Owner" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CDC Source.Outputs[Output].ExternalColumns[DateModified]"
+                      dataType="dbTimeStamp"
+                      name="DateModified" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CDC Source.Outputs[Output].ExternalColumns[DateCreated]"
+                      dataType="dbTimeStamp"
+                      name="DateCreated" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CDC Source.Outputs[Output].ExternalColumns[LastModifiedBy]"
+                      dataType="wstr"
+                      length="30"
+                      name="LastModifiedBy" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CDC Source.Outputs[Output].ExternalColumns[IsActive]"
+                      dataType="bool"
+                      name="IsActive" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\CDC Source.Outputs[ErrorOutput]"
+                  isErrorOut="true"
+                  name="ErrorOutput">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\CDC Source.Outputs[ErrorOutput].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[ErrorOutput].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CDC Source.Outputs[ErrorOutput].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[ErrorOutput].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CDC Source.Outputs[ErrorOutput].Columns[__$start_lsn]"
+                      dataType="bytes"
+                      length="10"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[ErrorOutput].Columns[__$start_lsn]"
+                      name="__$start_lsn" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CDC Source.Outputs[ErrorOutput].Columns[__$operation]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[ErrorOutput].Columns[__$operation]"
+                      name="__$operation" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CDC Source.Outputs[ErrorOutput].Columns[__$update_mask]"
+                      dataType="bytes"
+                      length="128"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[ErrorOutput].Columns[__$update_mask]"
+                      name="__$update_mask" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CDC Source.Outputs[ErrorOutput].Columns[AppId]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[ErrorOutput].Columns[AppId]"
+                      name="AppId" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CDC Source.Outputs[ErrorOutput].Columns[AppName]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[ErrorOutput].Columns[AppName]"
+                      name="AppName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CDC Source.Outputs[ErrorOutput].Columns[ExternalURL]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[ErrorOutput].Columns[ExternalURL]"
+                      name="ExternalURL" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CDC Source.Outputs[ErrorOutput].Columns[InternalURL]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[ErrorOutput].Columns[InternalURL]"
+                      name="InternalURL" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CDC Source.Outputs[ErrorOutput].Columns[Owner]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[ErrorOutput].Columns[Owner]"
+                      name="Owner" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CDC Source.Outputs[ErrorOutput].Columns[DateModified]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[ErrorOutput].Columns[DateModified]"
+                      name="DateModified" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CDC Source.Outputs[ErrorOutput].Columns[DateCreated]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[ErrorOutput].Columns[DateCreated]"
+                      name="DateCreated" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CDC Source.Outputs[ErrorOutput].Columns[LastModifiedBy]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[ErrorOutput].Columns[LastModifiedBy]"
+                      name="LastModifiedBy" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CDC Source.Outputs[ErrorOutput].Columns[IsActive]"
+                      dataType="bool"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[ErrorOutput].Columns[IsActive]"
+                      name="IsActive" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\CDC Splitter"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Attunity Ltd.; All Rights Reserved; http://www.attunity.com;"
+              description="Directs a stream of net change records into different outputs based on the type of the change (Insert, Delete and Update). This allows specific handling for different types of change records."
+              name="CDC Splitter"
+              usesDispositions="true"
+              version="8">
+              <properties>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Attunity.CdcSplitterComponent</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\CDC Splitter.Inputs[Input]"
+                  errorOrTruncationOperation="Operation of the changed row is not a valid one"
+                  errorRowDisposition="FailComponent"
+                  name="Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\CDC Splitter.Inputs[Input].Columns[__$start_lsn]"
+                      cachedDataType="bytes"
+                      cachedLength="10"
+                      cachedName="__$start_lsn"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[__$start_lsn]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\CDC Splitter.Inputs[Input].Columns[__$operation]"
+                      cachedDataType="i4"
+                      cachedName="__$operation"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[__$operation]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\CDC Splitter.Inputs[Input].Columns[__$update_mask]"
+                      cachedDataType="bytes"
+                      cachedLength="128"
+                      cachedName="__$update_mask"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[__$update_mask]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\CDC Splitter.Inputs[Input].Columns[AppId]"
+                      cachedDataType="i4"
+                      cachedName="AppId"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[AppId]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\CDC Splitter.Inputs[Input].Columns[AppName]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="AppName"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[AppName]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\CDC Splitter.Inputs[Input].Columns[ExternalURL]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="ExternalURL"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[ExternalURL]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\CDC Splitter.Inputs[Input].Columns[InternalURL]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="InternalURL"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[InternalURL]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\CDC Splitter.Inputs[Input].Columns[Owner]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="Owner"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[Owner]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\CDC Splitter.Inputs[Input].Columns[DateModified]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DateModified"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[DateModified]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\CDC Splitter.Inputs[Input].Columns[DateCreated]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DateCreated"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[DateCreated]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\CDC Splitter.Inputs[Input].Columns[LastModifiedBy]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="LastModifiedBy"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[LastModifiedBy]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\CDC Splitter.Inputs[Input].Columns[IsActive]"
+                      cachedDataType="bool"
+                      cachedName="IsActive"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[IsActive]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\CDC Splitter.Outputs[InsertOutput]"
+                  exclusionGroup="1"
+                  name="InsertOutput"
+                  synchronousInputId="Package\Data Flow Task\CDC Splitter.Inputs[Input]">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Output type - Insert."
+                      name="OutputType"
+                      typeConverter="Attunity.SqlServer.CDCSplit.OutputType">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\CDC Splitter.Outputs[DeleteOutput]"
+                  exclusionGroup="1"
+                  name="DeleteOutput"
+                  synchronousInputId="Package\Data Flow Task\CDC Splitter.Inputs[Input]">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Output type - Delete."
+                      name="OutputType"
+                      typeConverter="Attunity.SqlServer.CDCSplit.OutputType">2</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\CDC Splitter.Outputs[UpdateOutput]"
+                  exclusionGroup="1"
+                  name="UpdateOutput"
+                  synchronousInputId="Package\Data Flow Task\CDC Splitter.Inputs[Input]">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Output type - Update."
+                      name="OutputType"
+                      typeConverter="Attunity.SqlServer.CDCSplit.OutputType">1</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\CDC Splitter.Outputs[ErrorOutput]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="ErrorOutput"
+                  synchronousInputId="Package\Data Flow Task\CDC Splitter.Inputs[Input]">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Output type - Error."
+                      name="OutputType"
+                      typeConverter="Attunity.SqlServer.CDCSplit.OutputType">3</property>
+                  </properties>
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\CDC Splitter.Outputs[ErrorOutput].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\CDC Splitter.Outputs[ErrorOutput].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CDC Splitter.Outputs[ErrorOutput].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\CDC Splitter.Outputs[ErrorOutput].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\DELETE RECORDS"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DELETE RECORDS"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Apps_DEL]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">true</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\DELETE RECORDS.Connections[OleDbConnection]"
+                  connectionManagerID="{D4F0DC9C-E369-419D-9C8B-2677F1164BFD}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[TATCDC_SSIS_DBStaging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\DELETE RECORDS.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\DELETE RECORDS.Inputs[OLE DB Destination Input].Columns[AppId]"
+                      cachedDataType="i4"
+                      cachedName="AppId"
+                      externalMetadataColumnId="Package\Data Flow Task\DELETE RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[AppId]"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[AppId]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\DELETE RECORDS.Inputs[OLE DB Destination Input].Columns[AppName]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="AppName"
+                      externalMetadataColumnId="Package\Data Flow Task\DELETE RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[AppName]"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[AppName]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\DELETE RECORDS.Inputs[OLE DB Destination Input].Columns[ExternalURL]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="ExternalURL"
+                      externalMetadataColumnId="Package\Data Flow Task\DELETE RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[ExternalURL]"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[ExternalURL]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\DELETE RECORDS.Inputs[OLE DB Destination Input].Columns[InternalURL]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="InternalURL"
+                      externalMetadataColumnId="Package\Data Flow Task\DELETE RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[InternalURL]"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[InternalURL]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\DELETE RECORDS.Inputs[OLE DB Destination Input].Columns[Owner]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="Owner"
+                      externalMetadataColumnId="Package\Data Flow Task\DELETE RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[Owner]"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[Owner]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\DELETE RECORDS.Inputs[OLE DB Destination Input].Columns[DateModified]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DateModified"
+                      externalMetadataColumnId="Package\Data Flow Task\DELETE RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[DateModified]"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[DateModified]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\DELETE RECORDS.Inputs[OLE DB Destination Input].Columns[DateCreated]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DateCreated"
+                      externalMetadataColumnId="Package\Data Flow Task\DELETE RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[DateCreated]"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[DateCreated]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\DELETE RECORDS.Inputs[OLE DB Destination Input].Columns[LastModifiedBy]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="LastModifiedBy"
+                      externalMetadataColumnId="Package\Data Flow Task\DELETE RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[LastModifiedBy]"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[LastModifiedBy]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\DELETE RECORDS.Inputs[OLE DB Destination Input].Columns[IsActive]"
+                      cachedDataType="bool"
+                      cachedName="IsActive"
+                      externalMetadataColumnId="Package\Data Flow Task\DELETE RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[IsActive]"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[IsActive]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DELETE RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[AppId]"
+                      dataType="i4"
+                      name="AppId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DELETE RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[AppName]"
+                      dataType="wstr"
+                      length="100"
+                      name="AppName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DELETE RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[ExternalURL]"
+                      dataType="wstr"
+                      length="100"
+                      name="ExternalURL" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DELETE RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[InternalURL]"
+                      dataType="wstr"
+                      length="100"
+                      name="InternalURL" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DELETE RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[Owner]"
+                      dataType="wstr"
+                      length="30"
+                      name="Owner" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DELETE RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[DateModified]"
+                      dataType="dbTimeStamp"
+                      name="DateModified" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DELETE RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[DateCreated]"
+                      dataType="dbTimeStamp"
+                      name="DateCreated" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DELETE RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[LastModifiedBy]"
+                      dataType="wstr"
+                      length="30"
+                      name="LastModifiedBy" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DELETE RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[IsActive]"
+                      dataType="bool"
+                      name="IsActive" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\DELETE RECORDS.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task\DELETE RECORDS.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\DELETE RECORDS.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\DELETE RECORDS.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DELETE RECORDS.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\DELETE RECORDS.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\INSERT RECORDS"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="INSERT RECORDS"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Apps_INS]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">true</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\INSERT RECORDS.Connections[OleDbConnection]"
+                  connectionManagerID="{D4F0DC9C-E369-419D-9C8B-2677F1164BFD}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[TATCDC_SSIS_DBStaging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\INSERT RECORDS.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\INSERT RECORDS.Inputs[OLE DB Destination Input].Columns[AppId]"
+                      cachedDataType="i4"
+                      cachedName="AppId"
+                      externalMetadataColumnId="Package\Data Flow Task\INSERT RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[AppId]"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[AppId]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\INSERT RECORDS.Inputs[OLE DB Destination Input].Columns[AppName]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="AppName"
+                      externalMetadataColumnId="Package\Data Flow Task\INSERT RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[AppName]"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[AppName]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\INSERT RECORDS.Inputs[OLE DB Destination Input].Columns[ExternalURL]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="ExternalURL"
+                      externalMetadataColumnId="Package\Data Flow Task\INSERT RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[ExternalURL]"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[ExternalURL]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\INSERT RECORDS.Inputs[OLE DB Destination Input].Columns[InternalURL]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="InternalURL"
+                      externalMetadataColumnId="Package\Data Flow Task\INSERT RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[InternalURL]"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[InternalURL]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\INSERT RECORDS.Inputs[OLE DB Destination Input].Columns[Owner]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="Owner"
+                      externalMetadataColumnId="Package\Data Flow Task\INSERT RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[Owner]"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[Owner]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\INSERT RECORDS.Inputs[OLE DB Destination Input].Columns[DateModified]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DateModified"
+                      externalMetadataColumnId="Package\Data Flow Task\INSERT RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[DateModified]"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[DateModified]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\INSERT RECORDS.Inputs[OLE DB Destination Input].Columns[DateCreated]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DateCreated"
+                      externalMetadataColumnId="Package\Data Flow Task\INSERT RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[DateCreated]"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[DateCreated]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\INSERT RECORDS.Inputs[OLE DB Destination Input].Columns[LastModifiedBy]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="LastModifiedBy"
+                      externalMetadataColumnId="Package\Data Flow Task\INSERT RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[LastModifiedBy]"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[LastModifiedBy]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\INSERT RECORDS.Inputs[OLE DB Destination Input].Columns[IsActive]"
+                      cachedDataType="bool"
+                      cachedName="IsActive"
+                      externalMetadataColumnId="Package\Data Flow Task\INSERT RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[IsActive]"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[IsActive]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\INSERT RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[AppId]"
+                      dataType="i4"
+                      name="AppId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\INSERT RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[AppName]"
+                      dataType="wstr"
+                      length="100"
+                      name="AppName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\INSERT RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[ExternalURL]"
+                      dataType="wstr"
+                      length="100"
+                      name="ExternalURL" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\INSERT RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[InternalURL]"
+                      dataType="wstr"
+                      length="100"
+                      name="InternalURL" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\INSERT RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[Owner]"
+                      dataType="wstr"
+                      length="30"
+                      name="Owner" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\INSERT RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[DateModified]"
+                      dataType="dbTimeStamp"
+                      name="DateModified" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\INSERT RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[DateCreated]"
+                      dataType="dbTimeStamp"
+                      name="DateCreated" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\INSERT RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[LastModifiedBy]"
+                      dataType="wstr"
+                      length="30"
+                      name="LastModifiedBy" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\INSERT RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[IsActive]"
+                      dataType="bool"
+                      name="IsActive" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\INSERT RECORDS.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task\INSERT RECORDS.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\INSERT RECORDS.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\INSERT RECORDS.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\INSERT RECORDS.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\INSERT RECORDS.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\UPDATE RECORDS"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="UPDATE RECORDS"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Apps_UPD]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">true</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\UPDATE RECORDS.Connections[OleDbConnection]"
+                  connectionManagerID="{D4F0DC9C-E369-419D-9C8B-2677F1164BFD}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[TATCDC_SSIS_DBStaging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\UPDATE RECORDS.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\UPDATE RECORDS.Inputs[OLE DB Destination Input].Columns[AppId]"
+                      cachedDataType="i4"
+                      cachedName="AppId"
+                      externalMetadataColumnId="Package\Data Flow Task\UPDATE RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[AppId]"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[AppId]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\UPDATE RECORDS.Inputs[OLE DB Destination Input].Columns[AppName]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="AppName"
+                      externalMetadataColumnId="Package\Data Flow Task\UPDATE RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[AppName]"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[AppName]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\UPDATE RECORDS.Inputs[OLE DB Destination Input].Columns[ExternalURL]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="ExternalURL"
+                      externalMetadataColumnId="Package\Data Flow Task\UPDATE RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[ExternalURL]"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[ExternalURL]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\UPDATE RECORDS.Inputs[OLE DB Destination Input].Columns[InternalURL]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="InternalURL"
+                      externalMetadataColumnId="Package\Data Flow Task\UPDATE RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[InternalURL]"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[InternalURL]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\UPDATE RECORDS.Inputs[OLE DB Destination Input].Columns[Owner]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="Owner"
+                      externalMetadataColumnId="Package\Data Flow Task\UPDATE RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[Owner]"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[Owner]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\UPDATE RECORDS.Inputs[OLE DB Destination Input].Columns[DateModified]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DateModified"
+                      externalMetadataColumnId="Package\Data Flow Task\UPDATE RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[DateModified]"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[DateModified]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\UPDATE RECORDS.Inputs[OLE DB Destination Input].Columns[DateCreated]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DateCreated"
+                      externalMetadataColumnId="Package\Data Flow Task\UPDATE RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[DateCreated]"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[DateCreated]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\UPDATE RECORDS.Inputs[OLE DB Destination Input].Columns[LastModifiedBy]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="LastModifiedBy"
+                      externalMetadataColumnId="Package\Data Flow Task\UPDATE RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[LastModifiedBy]"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[LastModifiedBy]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\UPDATE RECORDS.Inputs[OLE DB Destination Input].Columns[IsActive]"
+                      cachedDataType="bool"
+                      cachedName="IsActive"
+                      externalMetadataColumnId="Package\Data Flow Task\UPDATE RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[IsActive]"
+                      lineageId="Package\Data Flow Task\CDC Source.Outputs[Output].Columns[IsActive]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\UPDATE RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[AppId]"
+                      dataType="i4"
+                      name="AppId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\UPDATE RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[AppName]"
+                      dataType="wstr"
+                      length="100"
+                      name="AppName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\UPDATE RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[ExternalURL]"
+                      dataType="wstr"
+                      length="100"
+                      name="ExternalURL" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\UPDATE RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[InternalURL]"
+                      dataType="wstr"
+                      length="100"
+                      name="InternalURL" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\UPDATE RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[Owner]"
+                      dataType="wstr"
+                      length="30"
+                      name="Owner" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\UPDATE RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[DateModified]"
+                      dataType="dbTimeStamp"
+                      name="DateModified" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\UPDATE RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[DateCreated]"
+                      dataType="dbTimeStamp"
+                      name="DateCreated" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\UPDATE RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[LastModifiedBy]"
+                      dataType="wstr"
+                      length="30"
+                      name="LastModifiedBy" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\UPDATE RECORDS.Inputs[OLE DB Destination Input].ExternalColumns[IsActive]"
+                      dataType="bool"
+                      name="IsActive" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\UPDATE RECORDS.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task\UPDATE RECORDS.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\UPDATE RECORDS.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\UPDATE RECORDS.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\UPDATE RECORDS.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\UPDATE RECORDS.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[DeleteOutput]"
+              endId="Package\Data Flow Task\DELETE RECORDS.Inputs[OLE DB Destination Input]"
+              name="DeleteOutput"
+              startId="Package\Data Flow Task\CDC Splitter.Outputs[DeleteOutput]" />
+            <path
+              refId="Package\Data Flow Task.Paths[InsertOutput]"
+              endId="Package\Data Flow Task\INSERT RECORDS.Inputs[OLE DB Destination Input]"
+              name="InsertOutput"
+              startId="Package\Data Flow Task\CDC Splitter.Outputs[InsertOutput]" />
+            <path
+              refId="Package\Data Flow Task.Paths[Output]"
+              endId="Package\Data Flow Task\CDC Splitter.Inputs[Input]"
+              name="Output"
+              startId="Package\Data Flow Task\CDC Source.Outputs[Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[UpdateOutput]"
+              endId="Package\Data Flow Task\UPDATE RECORDS.Inputs[OLE DB Destination Input]"
+              name="UpdateOutput"
+              startId="Package\Data Flow Task\CDC Splitter.Outputs[UpdateOutput]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{19C7AD88-846C-49A6-BD44-8B1706FB1F75}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022 CTP2.0; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{D4F0DC9C-E369-419D-9C8B-2677F1164BFD}" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get Processing Range"
+      DTS:CreationName="Attunity.CdcControlTask"
+      DTS:Description="CDC Control Task"
+      DTS:DTSID="{E09CD0DF-D16C-4CAA-A994-A09562151A98}"
+      DTS:ExecutableType="Attunity.CdcControlTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get Processing Range"
+      DTS:TaskContact="Attunity Ltd.; All Rights Reserved; http://www.attunity.com;"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <CDCControlTask
+          Connection="DHAdministration_ADOSource"
+          TaskOperation="GetProcessingRange"
+          OperationParameter=""
+          StateConnection="TATCDC_SSIS_ADOStatging"
+          StateVariable="User::CDC_State"
+          AutomaticStatePersistence="True"
+          StateName="CDC_State_INC_Apps"
+          StateTable="[dbo].[cdc_states]"
+          CommandTimeout="30"
+          ChangeDetectionRetryInterval="10"
+          ChangeDetectionTimeout="60" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Mark Processed Range"
+      DTS:CreationName="Attunity.CdcControlTask"
+      DTS:Description="CDC Control Task"
+      DTS:DTSID="{D994B154-4D8C-4369-A94F-426193BAA17A}"
+      DTS:ExecutableType="Attunity.CdcControlTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Mark Processed Range"
+      DTS:TaskContact="Attunity Ltd.; All Rights Reserved; http://www.attunity.com;"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <CDCControlTask
+          Connection="DHAdministration_ADOSource"
+          TaskOperation="MarkProcessedRange"
+          OperationParameter=""
+          StateConnection="TATCDC_SSIS_ADOStatging"
+          StateVariable="User::CDC_State"
+          AutomaticStatePersistence="True"
+          StateName="CDC_State_INC_Apps"
+          StateTable="[dbo].[cdc_states]"
+          CommandTimeout="30"
+          ChangeDetectionRetryInterval="10"
+          ChangeDetectionTimeout="60" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate Staging Table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{93FE1BC9-1DB2-4021-A582-2FB4371F5783}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate Staging Table"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022 CTP2.0; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{D4F0DC9C-E369-419D-9C8B-2677F1164BFD}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE [dbo].[Apps_DEL];&#xA;TRUNCATE TABLE [dbo].[Apps_INS];&#xA;TRUNCATE TABLE [dbo].[Apps_UPD]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{89F42EE9-96F8-453B-B5DC-770F24A0C475}"
+      DTS:From="Package\Truncate Staging Table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Get Processing Range" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{7CBA9341-1495-48A8-8F01-E3550E5A0F16}"
+      DTS:From="Package\Get Processing Range"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Data Flow Task" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{2A281403-ABEC-4A48-9440-2D7A3A2E82AA}"
+      DTS:From="Package\Data Flow Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Mark Processed Range" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{4927C0B1-3C20-4C69-AEFD-7CE72D8066EE}"
+      DTS:From="Package\Mark Processed Range"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Execute SQL Task" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="182.666666666667,42"
+          Id="Package\Data Flow Task"
+          TopLeft="220.783330051353,245.631583570774" />
+        <NodeLayout
+          Size="168,42.6666666666667"
+          Id="Package\Execute SQL Task"
+          TopLeft="228.116663384686,401.087726458728" />
+        <NodeLayout
+          Size="186.666666666667,42.6666666666667"
+          Id="Package\Get Processing Range"
+          TopLeft="218.783330051353,153.263160779536" />
+        <NodeLayout
+          Size="190.666666666667,42.6666666666667"
+          Id="Package\Mark Processed Range"
+          TopLeft="216.783330051353,320.210532342958" />
+        <NodeLayout
+          Size="190.666666666667,42.6666666666667"
+          Id="Package\Truncate Staging Table"
+          TopLeft="216.783330051353,63.6315801450751" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="312.116663384686,106.298246811742">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,46.9649139677939"
+              Start="0,0"
+              End="0,39.4649139677939">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.4649139677939" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="312.116663384686,195.929827446202">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,49.7017561245713"
+              Start="0,0"
+              End="0,42.2017561245713">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,42.2017561245713" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="312.116663384686,287.631583570774">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32.5789487721848"
+              Start="0,0"
+              End="0,25.0789487721848">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.0789487721848" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="312.116663384686,362.877199009625">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38.2105274491033"
+              Start="0,0"
+              End="0,30.7105274491033">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.7105274491033" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="139.333333333334,42.6666666666667"
+          Id="Package\Data Flow Task\CDC Splitter"
+          TopLeft="171.249997448176,155.315792397119" />
+        <NodeLayout
+          Size="178.666666666667,42.6666666666667"
+          Id="Package\Data Flow Task\UPDATE RECORDS"
+          TopLeft="272.499995939434,244.263162492385" />
+        <NodeLayout
+          Size="174.666666666667,42.6666666666667"
+          Id="Package\Data Flow Task\INSERT RECORDS"
+          TopLeft="31.8749995250254,240.157899257219" />
+        <NodeLayout
+          Size="177.333333333334,42.6666666666667"
+          Id="Package\Data Flow Task\DELETE RECORDS"
+          TopLeft="506.874992446974,239.929828914359" />
+        <NodeLayout
+          Size="140,42.6666666666667"
+          Id="Package\Data Flow Task\CDC Source"
+          TopLeft="172.49999742955,67.0526328410468" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[InsertOutput]"
+          TopLeft="208.08333078151,197.982459063785">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-88.8749979231508,42.1754401934335"
+              Start="0,0"
+              End="-88.8749979231508,34.6754401934335">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,10.5864980950685" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,10.5864980950685"
+                    Point2="0,14.5864980950685"
+                    Point3="-4,14.5864980950685" />
+                  <mssgle:LineSegment
+                    End="-84.8749979231508,14.5864980950685" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-84.8749979231508,14.5864980950685"
+                    Point2="-88.8749979231508,14.5864980950685"
+                    Point3="-88.8749979231508,18.5864980950685" />
+                  <mssgle:LineSegment
+                    End="-88.8749979231508,34.6754401934335" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-73.4154872428254,19.5864980950685,57.9559765625,11.43359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[DeleteOutput]"
+          TopLeft="273.749997448176,197.982459063785">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="321.791661665464,41.9473698505735"
+              Start="0,0"
+              End="321.791661665464,34.4473698505735">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,10.5076193066929" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,10.5076193066929"
+                    Point2="0,14.5076193066929"
+                    Point3="4,14.5076193066929" />
+                  <mssgle:LineSegment
+                    End="317.791661665464,14.5076193066929" />
+                  <mssgle:CubicBezierSegment
+                    Point1="317.791661665464,14.5076193066929"
+                    Point2="321.791661665464,14.5076193066929"
+                    Point3="321.791661665464,18.5076193066929" />
+                  <mssgle:LineSegment
+                    End="321.791661665464,34.4473698505735" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="130.949444113982,19.5076193066929,59.8927734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[UpdateOutput]"
+          TopLeft="240.916664114843,197.982459063785">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="120.916665157924,46.2807034285995"
+              Start="0,0"
+              End="120.916665157924,38.7807034285995">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.1403517142998" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.1403517142998"
+                    Point2="0,23.1403517142998"
+                    Point3="4,23.1403517142998" />
+                  <mssgle:LineSegment
+                    End="116.916665157924,23.1403517142998" />
+                  <mssgle:CubicBezierSegment
+                    Point1="116.916665157924,23.1403517142998"
+                    Point2="120.916665157924,23.1403517142998"
+                    Point3="120.916665157924,27.1403517142998" />
+                  <mssgle:LineSegment
+                    End="120.916665157924,38.7807034285995" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="28.828000547712,28.1403517142998,63.2606640625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Output]"
+          TopLeft="241.708330772196,109.719299507713">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,45.5964928894052"
+              Start="0,0"
+              End="0,38.0964928894052">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,38.0964928894052" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\DELETE RECORDS">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\UPDATE RECORDS">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\INSERT RECORDS">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\CDC Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

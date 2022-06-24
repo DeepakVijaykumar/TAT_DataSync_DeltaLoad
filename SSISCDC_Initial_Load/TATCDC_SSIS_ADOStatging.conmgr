@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="TATCDC_SSIS_ADOStatging"
+  DTS:DTSID="{7035C204-00C2-4249-BA18-6EE0A0676599}"
+  DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <DTS:PropertyExpression
+    DTS:Name="ConnectionString">@[$Project::P_SRVTATSQLNPTST_TATCDC_ADO]</DTS:PropertyExpression>
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="Data Source=SRVTATSQLNPTST;User ID=TATNP;Initial Catalog=TATCDC_SSIS;Application Name=SSIS-Package-{7035C204-00C2-4249-BA18-6EE0A0676599}SRVTATSQLNPTST.TATCDC_SSIS1;">
+      <DTS:Password
+        DTS:Name="Password"
+        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAKgDWckUUQEWUZE0Ery4fPwAAAAACAAAAAAADZgAAwAAAABAAAADbvWdxjpLX0ufs4CfIq+hYAAAAAASAAACgAAAAEAAAALK9JsKdd/jY3vAsB85Yt3SAAAAAtXzinksc3UYM0riKyCib51nhXN4IvikTitVyK6/jDPH/s8H+v3ZrnWFsGICrWHgcy8Qt1N9LYvSnguI+b5niedsL2n8v47t8HIO/GPNPcGFjZKj/KIT/25i8wQi7ZxVqncCOfWGaCEhehen3InCadm1TUO4CiXeZ/p4UirvqlE8UAAAAd+yqyOrMCtxfx1Vs3ZybaA5VnEk=</DTS:Password>
+    </DTS:ConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>
